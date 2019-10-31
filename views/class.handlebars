@@ -1,0 +1,12 @@
+<a href="/addReview" class="btn btn-info" role="button">Add New Review</a>
+
+<h2>All Reviews for teachers teaching {{class}}</h2>
+<hr>
+<div id="noMatches"></div>
+{{#each data}}
+    {{> review}}
+{{else}}
+    <article>
+        <h1>There are no reviews yet. :(</h1>
+    </article>
+{{/each}}

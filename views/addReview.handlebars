@@ -1,0 +1,51 @@
+<h1>Create New Review</h1>
+<article>
+    <form method="POST" action="/addReview">
+        <div class="input-field">
+            <label>Professor Name:</label>
+            {{#if name}}
+                <input type="text" name="name" size="50" value="{{name}}">
+            {{else}}
+                <input type="text" name="name" size="50" placeholder="John Smith">
+            {{/if}}
+
+        </div>
+        <div class="input-field">
+            <label>Department:</label>
+            {{#if department}}
+                <input type="text" name="department" size="50" value="{{department}}">
+            {{else}}
+                <input type="text" name="department" size="50" placeholder="Computer Science">
+            {{/if}}
+        </div>
+        <div class="input-field">
+            <label>Rating:</label>
+            <input type="number" name="rating" min="1" max="10" placeholder="1-10">
+        </div>
+        <div class="input-field">
+            <label>Review:</label>
+            <input type="text" name="review" size="50" placeholder="Amazing teacher, great teaching style!"></input>
+        </div>
+        <div class="input-field">
+            <label>Class:</label>
+            <input type="text" name="classes" size="10" placeholder="ABCD123"></input>
+        </div>
+        <button type="submit">Create New Review</button>
+    </form>
+</article>
+
+<script>
+    $(document).ready(function(){
+        $('input[type="number"]').on('keyup',function(){
+            v = parseInt($(this).val());
+            min = parseInt($(this).attr('min'));
+            max = parseInt($(this).attr('max'));
+
+            if (v < min){
+                $(this).val(min);
+            } else if (v > max){
+                $(this).val(max);
+            }
+        })
+    })
+</script>
