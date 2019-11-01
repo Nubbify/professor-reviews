@@ -79,7 +79,8 @@ app.get('/worst', function(req, res) {
 app.get('/department/:department', function(req, res) {
     var results = _.filter(_DATA, {department: req.params.department});
     res.render('department', {
-        data: results
+        data: results,
+        department: req.params.department
     });
 });
 
@@ -88,7 +89,8 @@ app.get('/class/:class', function(req, res) {
         return review.classes.includes(req.params.class);
     });
     res.render('class', {
-        data: results
+        data: results,
+        className: req.params.class
     });
 });
 
