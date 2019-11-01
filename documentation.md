@@ -1,4 +1,4 @@
-
+https://midterm-389.herokuapp.com/
 # How's My Professor
 
 ---
@@ -66,7 +66,10 @@ request(options, function (error, response, body) {
 
 ### 3. View Data
 
-GET endpoint route: `/api/...`
+GET endpoint route: `/api/getReviews` 
+
+To get API endpoints for navigation page information, 
+just prepend it with /api/ (for example - /app/department/:department_name)
 
 ### 4. Search Data
 
