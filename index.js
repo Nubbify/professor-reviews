@@ -63,16 +63,16 @@ app.post('/addReview', function(req, res) {
 })
 
 app.get('/best', function(req, res) {
-    var results = _.max(_DATA, function(review) {return review.rating;});
+    var results = _.filter(_DATA, function(review) {return review.rating > 8.5;});
     res.render('best', {
-        data: [results]
+        data: results
     });
 });
 
 app.get('/worst', function(req, res) {
-    var results = _.min(_DATA, function(review) {return review.rating;});
+    var results = _.filter(_DATA, function(review) {return review.rating < 2.5;});
     res.render('worst', {
-        data: [results]
+        data: results
     });
 });
 

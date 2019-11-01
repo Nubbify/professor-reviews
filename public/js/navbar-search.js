@@ -24,12 +24,13 @@ $(document).ready(function() {
 function findByClass() {
     var className = encodeURIComponent($('#classSearch').val());
     let href = "/class/" + className;
-    window.location.href = href;
-
+    if (className != "")
+        window.location.href = href;
 }
 
 function findByDepartment() {
     var deptName = encodeURIComponent($('#deptSearch').val());
     let href = "/department/" + deptName;
-    window.location.href = href;
+    if (deptName != "")
+        window.location.href = href;
 }
