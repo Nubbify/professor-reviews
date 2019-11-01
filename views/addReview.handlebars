@@ -1,6 +1,6 @@
 <h1>Create New Review</h1>
 <article>
-    <form method="POST" action="/addReview">
+    <form id="reviewForm" method="POST" action="/addReview">
         <div class="input-field">
             <label>Professor Name:</label>
             {{#if name}}
@@ -24,28 +24,14 @@
         </div>
         <div class="input-field">
             <label>Review:</label>
-            <input type="text" name="review" size="50" placeholder="Amazing teacher, great teaching style!"></input>
+            <input type="text" name="review" size="50" placeholder="Amazing teacher, great teaching style!">
         </div>
         <div class="input-field">
             <label>Class:</label>
-            <input type="text" name="classes" size="10" placeholder="ABCD123"></input>
+            <input type="text" name="classes" size="10" placeholder="ABCD123">
         </div>
-        <button type="submit">Create New Review</button>
+        <button type="submit" id="submit" disabled="disabled" value="submit">Create New Review</button>
     </form>
 </article>
 
-<script>
-    $(document).ready(function(){
-        $('input[type="number"]').on('keyup',function(){
-            v = parseInt($(this).val());
-            min = parseInt($(this).attr('min'));
-            max = parseInt($(this).attr('max'));
-
-            if (v < min){
-                $(this).val(min);
-            } else if (v > max){
-                $(this).val(max);
-            }
-        })
-    })
-</script>
+<script src="/public/js/addReview.js"></script>

@@ -43,6 +43,10 @@ app.post('/addReview', function(req, res) {
     var currentReview = _.findWhere(_DATA, {name: req.body.name, department: req.body.department});
     if (req.body.rating > 10) req.body.rating = 10;
     if (req.body.rating < 1) req.body.rating = 1;
+    if (req.body.name == "" || req.body.review == "" || req.body.classes == "") {
+        res.statusCode = 400;
+        res.redirect("/");
+    }
     if (!currentReview) {
         // Save new review
         req.body.review = [req.body.review];
@@ -97,7 +101,7 @@ app.get('/class/:class', function(req, res) {
 app.get('/random', function(req, res) {
     var results = _DATA[Math.floor(Math.random()*_DATA.length)];
     res.render('random', {
-        data: [results]
+        data: results
     });
 });
 
@@ -105,6 +109,10 @@ app.post('/api/addReview', function(req, res) {
     var currentReview = _.findWhere(_DATA, {name: req.body.name, department: req.body.department});
     if (req.body.rating > 10) req.body.rating = 10;
     if (req.body.rating < 1) req.body.rating = 1;
+    if (req.body.name == "" || req.body.review == "" || req.body.classes == "") {
+        res.statusCode = 400;
+        res.json({error: "Ensure all fields are properly filled out."});
+    }
     if (!currentReview) {
         // Save new review
         req.body.review = [req.body.review];

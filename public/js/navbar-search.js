@@ -1,3 +1,4 @@
+//Live name search on page
 $(document).ready(function() {
     $('#currentFilter').keyup(function() {
         var str = $(this).val();
@@ -21,6 +22,7 @@ $(document).ready(function() {
     });
 });
 
+//Class search
 function findByClass() {
     var className = encodeURIComponent($('#classSearch').val());
     let href = "/class/" + className;
@@ -28,6 +30,7 @@ function findByClass() {
         window.location.href = href;
 }
 
+//Dept search
 function findByDepartment() {
     var deptName = encodeURIComponent($('#deptSearch').val());
     let href = "/department/" + deptName;

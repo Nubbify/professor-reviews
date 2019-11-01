@@ -78,8 +78,8 @@ Search Field: `name`
 ### 5. Navigation Pages
 
 Navigation Filters
-1. Best Review -> `/best`
-2. Worst Review -> `/worst`
+1. Best Reviews -> `/best`
+2. Worst Reviews -> `/worst`
 3. Look in a Department -> `/department/:department_name`
 4. Look for a class -> `/class/:class_name`
 5. Random review -> `/random`

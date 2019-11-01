@@ -23,8 +23,20 @@ function getAllClasses(data) {
     return allClasses;
 }
 
+function getAllDepartments(data) {
+    var allDepartments = [];
+    for(var i = 0; i < data.length; i++) {
+        var classList = data[i].classes;
+        for(var j = 0; j < classList.length; j++) {
+            if(!~allDepartments.indexOf(classList[j])) allDepartments.push(classList[j]);
+        }
+    }
+    return allDepartments;
+}
+
 module.exports = {
     loadData: loadData,
     saveData: saveData,
-    getAllClasses: getAllClasses
+    getAllClasses: getAllClasses,
+    getAllDepartments: getAllDepartments
 }

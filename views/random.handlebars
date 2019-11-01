@@ -3,10 +3,10 @@
 <h2>Random Review</h2>
 <hr>
 <div id="noMatches"></div>
-{{#each data}}
-    {{> review}}
+{{#if data}}
+    {{> review data}}
 {{else}}
     <article>
         <h1>There are no reviews yet. :(</h1>
     </article>
-{{/each}}
+{{/if}}
