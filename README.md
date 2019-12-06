@@ -1,188 +1,145 @@
-# Midterm Project
-#### Out: 10/14/19 | Deadline: 11/1/19 11:00 AM
+https://nubbify-professor.herokuapp.com/
+# How's My Professor
 
-### Overview
+---
 
-In this project, you will tie together everything you have learned up to now in the semester.
+Name: Oscar Bautista
 
-The application you will build is a "crowdsourced data application".
+Date: December 6th, 2019
 
-You will utilze the technologies we learned (HTML, CSS, JS, Node.js, Express, and Handlebars) to create an API and front-end website with interactivity for your data.
+Project Topic: Professor reviews
 
-### Objectives
+URL: https://final-389.herokuapp.com/
+ ---
 
-The purpose of this project is to create a fully functioning **"crowdsourced data application"**.
+### 1. Data Format and Storage
 
-First, you must select a topic for your project to be on. Example topics could be (you cannot use any of these for your project):
-
-- Local Dogs for Adoption
-- Movie Reviews
-- UMD Clubs and Activities
-- Rock Climbing Gyms
-
-Topics should ideally be people/places/things that can be crowdsourced by users of your application. Throught this project specification, we will use **Local Dog for Adoption** as an example.
-
-This project is largely open ended. The only requirement is to satisfy all parts of the `Specifications` section below, which are broad and flexible. Outside of that, you are free to be creative and make something you are proud of.
-
-### Grading
-
-You fill submit both the application source as well as a `documentation.md` file that documents how you implemented each part of the project.
-
-Grading will be done using the `documentation.md` file to test your application.
-
-Each specificiation has two types of requirements:
-- (REQ): These are requirements **must** be followed. Failue to do so can result in up to 50% point deductions for the entire project.
-- (X pt): These specifications are worth X points.
-
-### Setup
-
-There is a provided a shell that has all the dependencies you need set up. We have also included several libaries you will need in `package.json`. Clone the shell and run `npm install`.
-
-### Specifications
-
-
-1. **Data Format and Storage**
-
-    - (REQ) Data should be stored similar to how the Pokemon API and the blog engine was set up
-    - (5 pt) Each data entity should have at least 5 associated keys
-    - (5 pt) The data entity should have one of each String, Number, and Array type.
-       - Example a movie review can contain a numerical rating, a director, and an array of reviews.
-    
-
-
-2. **Add New Data**
-
-    Users will need to be able to add data to your local storage. Users will be able to add data in two ways:
-
-    - (10 pt) Submitting an HTML form. The form should have an input for each data  field.
-    - (10 pt) Sending a `POST` request to an API endpoint. The API endpoint must    take in entry for each data field.
-
-    In `documentation.md`, you will need to include:
-    - At which route the HTML form lives on the website
-    - At which route the `POST` API endpoint can be accessed.
-    - An example Node.js `POST` request using the `request` module to the API   endpoint.
-
-    **`documentation.md` example**:
-    ```markdown
-    ### 2. Add New Data
-
-    HTML form route: `/addDog`
-    POST endpoint route: `/api/addDog`
-
-    Example Node.js POST request to endpoint:
-    var request = require("request");
-
-    var options = {
-        method: 'POST',
-        url: 'http://localhost:3000/api/addDog',
-        headers: {
-            'content-type': 'application/x-www-form-urlencoded'
+Schemas: 
+```javascript
+{
+    reviewSchema = new mongoose.Schema({
+        name: {
+            type: String,
+            required: true
         },
-        form: {
-            name: 'Cupcake',
-            breed: 'German Shepherd',
-            image: "http://i.imgur.com/iGLcfkN.jpg",
-            age: 10,
-            characteristics: ["Brown", "Black", "Sleepy", "Lazy"]
+        rating: {
+            type: Number,
+            min: 0.0,
+            max: 5.0,
+            required: true
+        },
+        review: {
+            type: String
         }
-    };
-
-    request(options, function (error, response, body) {
-      if (error) throw new Error(error);
-
-      console.log(body);
     });
-    ```
+    
+    teacherSchema = new mongoose.Schema({
+        name: {
+            type: String,
+            required: true
+        },
+        department: {
+            type: String
+        },
+        reviews: [reviewSchema]
+    });
+    
+    classSchema = new mongoose.Schema({
+        name: {
+            type: String,
+            required: true
+        },
+        department: {
+            type: String,
+            required: true
+        },
+        teachers: [teacherSchema]
+    });
+}
+```
 
-3. **View Data**
+### 2. Socket usage:
 
-    Users should be able to view all data in two ways:
+Sockets are used to listen for updates to the database and they push a small notification popup when a new review appears.
 
-    - (REQ) The HTML pages should be generated using Handlebars
-    - (10 pt) At the home `/` route, you should display every data point in an  HTML Page.
-    - (10 pt) At another API `GET` endpoint, you should return all data points as   JSON.
+### 3. View Data: 
 
-    In `documentation.md`, you will need to include:
-    - The **route** for the API endpoint that returns all data.
+Navigation pages for viewing data are:
+1. See list of departments -> `/department`
+2. See list of classes in a departments -> `/department/:department_name`
+3. See list of classes -> `/class`
+4. See reviews for a class -> `/class/:class_name`
+5. See list of teachers -> `/teacher`
+6. See reviews for a teacher -> `/teacher/:teacher_name`
+7. See all reviews -> `/`
+8. About -> `/about`
+
+Navigation pages for inserting data include:
+1. Add a review -> `/review/add`
+2. Add a teacher -> `/teacher/add`
+
+Adding classes is done through the API at `/api/addClass`
 
 
-    **`documentation.md` example**:
-    ```markdown
-    ### 3. View Data
+### 4. API endpoints
 
-    GET endpoint route: `/api/getDogs`
+1. POST endpoint route: `/api/review/add`
+2. POST endpoint route: `/api/teacher/add`
+3. POST endpoint route: `/api/class/add`
+4. DELETE endpoint route: `/api/class/remove/:className`
+5. DELETE endpoint route: `/api/review/remove/:review_id`
+6. GET endpoint route: `/api/department`
+7. GET endpoint route: `/api/department/:department_name`
+8. GET endpoint route: `/api/class`
+9. GET endpoint route: `/api/class/:className`
+10. GET endpoint route: `/api/teacher`
+11. GET endpoint route: `/api/teacher/:teacher_name`
 
-    ```
 
-4. **Search Data**
+Example Node.js POST request to endpoint 3: 
+```javascript
+var request = require("request");
 
-    Also on the home page, you should implement an **auto-updating search feature** .
+var options = { 
+    method: 'POST',
+    url: 'https://nubbify-professor.herokuapp.com/api/class/add',
+    headers: { 
+        'content-type': 'application/json' 
+    },
+    body: {
+        "name": "BMGT101",
+        "department": "Business"
+    }
+};
 
-    Select an appropriate field to run your searches on.
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
 
-    When the user first visits the home `/` page, they should see all data points.
+  console.log(body);
+});
+```
 
-    - (15 pt) As the user types in the search bar, filter the results on the page   to those that match the search query. The results should be **auto-updating**. This means that for every keystroke, the results should be updated. The page should NOT refresh while typing and searching.
-    - (5 pt) If there is no match, then display text indicating that there are no   matches.
+### 5. Modules
 
-    Note: Feel free to use any NPM modules or JavaScript libraries to help you complete this task.
+index.js should only deal with setting up the application and database connections.
 
-    **Example:**
+The files in routing deal with all of the express app routes. 
 
-    I chose to implement search on Dog names. Suppose I have dogs `"nelson"`,  `"nelley"`, and `"noslen"`. As soon as I type `"Ne"` (without hitting enter), the  list should be filtered to only include `"nelson"` and `"nelley"`. If I type `"Nee"`, then I should see something like "There are no dogs with the name "Nee".
+The files in controller deal with getting information from the database related to the name of it (i.e teacher.js gets information for teachers).
 
-    In `documentation.md`, you will need to include:
-    - Which field you chose to conduct the search on. If you pick a string field, please make sure it is case-insensitive.
 
-    **`documentation.md` example**:
-    ```markdown
-    ### 4. Search Data
+### 6. npm packages
 
-    Search Field: name
+Three foreign libraries include a pop-up library called  and a form validation library called and an input validation library called 
 
-    ```
+### 7. User Interface
 
-5. **Navigation Pages**
+Bootstrap and jquery are cool, right? Handlebars is also nice.
 
-    On the home `/` page, you should also have a **navigation bar**. This navigation bar will have **5 links**, and should be visible on every page.
+### 8. Deployment
 
-    The navigation bar links should filter your data in some way.
+This should be deployed at https://nubbify-professor.herokuapp.com/
 
-    As an example, for the Dogs example, we could have:
-    - Heavy Dogs: Lists all dogs over 20.0 pounds
-    - Select a Breed: Displays a list of breeds that you can use to filter.
-    - Young Dog: Lists all dogs younger than 4 years old.
-    - Random Dog: Showcases a random dog.
-    - Alphabetical Dogs: Lists all dogs in alphabetical order by name.
+### 9. README
 
-    (REQ) All additional pages must be rendered using handlebars.
-
-    (5 pt) 5 navigation bar links visible on each page (Hint: Use `main.handlebars`).
-
-    (15 pt) 5 pages linked to from the navigation bar that display the appropriate filtered data.
-
-    In `documentation.md`, you will need to include:
-    - Each of the 5 navigation filters
-    - The routes for each of the additional pages
-
-    **`documentation.md` example**:
-    ```markdown
-    ### 5. Navigation Pages
-
-    Navigation Filters
-    1. Heavy Dogs -> `/heaviest`
-    2. Select a Breed -> `/breed/:breed_name`
-    3. Young Dog -> `/youngest`
-    4. Random Dog -> `/random`
-    5. Alphabetical Dogs -> `/alphabetical`
-
-    ```
-
-### Submission
-
-We will be Heroku [Heroku](http://heroku.com) to submit one link per project.
-
-At the top of your project, include the **Heroku link** (ex: https://myapp.herokuapp.com) at the top of your `documentation.md` file, like so:
-
-Submit just the `documentation.md` file to the submit server.
-
+You're reading it! Yay! \o/

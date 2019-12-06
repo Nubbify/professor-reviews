@@ -30,7 +30,8 @@ reviewSchema = new mongoose.Schema({
     },
     review: {
         type: String
-    }
+    },
+    class: {type: mongoose.Schema.ObjectId, ref: 'class'}
 });
 
 teacherSchema = new mongoose.Schema({
@@ -47,7 +48,8 @@ teacherSchema = new mongoose.Schema({
     office: {
         type: String
     },
-    reviews: [reviewSchema]
+    reviews: [reviewSchema],
+    classes: [ {type: mongoose.Schema.ObjectId, ref: 'class'} ]
 });
 
 classSchema = new mongoose.Schema({
@@ -78,7 +80,7 @@ Navigation pages for viewing data are:
 4. See reviews for a class -> `/class/:class_name`
 5. See list of teachers -> `/teacher`
 6. See reviews for a teacher -> `/teacher/:teacher_name`
-7. See all reviews -> `/`
+7. See buttons to navigation pages for inserting data -> `/`
 8. About -> `/about`
 
 Navigation pages for inserting data include:
@@ -101,6 +103,30 @@ Adding classes is done through the API at `/api/addClass`
 9. GET endpoint route: `/api/class/:className`
 10. GET endpoint route: `/api/teacher`
 11. GET endpoint route: `/api/teacher/:teacher_name`
+
+Example Node.js POST request to endpoint 2
+```javascript
+var request = require("request");
+
+var options = { 
+    method: 'POST',
+    url: 'https://nubbify-professor.herokuapp.com/api/teacher/add',
+    headers: { 
+        'content-type': 'application/json' 
+    },
+    body: {
+	"name": "John Doe",
+	"department": "Business",
+	"office": "CSIC1010"
+    }
+};
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  console.log(body);
+});
+```
 
 
 Example Node.js POST request to endpoint 3: 

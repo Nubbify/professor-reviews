@@ -15,7 +15,8 @@ reviewSchema = new mongoose.Schema({
     },
     review: {
         type: String
-    }
+    },
+    class: {type: mongoose.Schema.ObjectId, ref: 'class'}
 });
 
 teacherSchema = new mongoose.Schema({
@@ -32,7 +33,8 @@ teacherSchema = new mongoose.Schema({
     office: {
         type: String
     },
-    reviews: [reviewSchema]
+    reviews: [reviewSchema],
+    classes: [ {type: mongoose.Schema.ObjectId, ref: 'class'} ]
 });
 
 classSchema = new mongoose.Schema({
