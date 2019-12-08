@@ -69,18 +69,18 @@ classSchema = new mongoose.Schema({
 
 ### 2. Socket usage:
 
-Sockets are used to listen for updates to the database and they push a small notification popup when a new review appears.
+No socket usage here. Couldn't come up with a good use for them in the time I spent. ):
 
 ### 3. View Data: 
 
 Navigation pages for viewing data are:
 1. See list of departments -> `/department`
-2. See list of classes in a departments -> `/department/:department_name`
+2. See list of classes/teachers in a departments -> `/department/:department_name`
 3. See list of classes -> `/class`
-4. See reviews for a class -> `/class/:class_name`
+4. See reviews for teachers that have taught a class -> `/class/:class_name`
 5. See list of teachers -> `/teacher`
 6. See reviews for a teacher -> `/teacher/:teacher_name`
-7. See buttons to navigation pages for inserting data -> `/`
+7. See buttons to insert data -> `/`
 8. About -> `/about`
 
 Navigation pages for inserting data include:
@@ -104,6 +104,32 @@ Adding classes is done through the API at `/api/addClass`
 10. GET endpoint route: `/api/teacher`
 11. GET endpoint route: `/api/teacher/:teacherName`
 
+Example Node.js POST request to endpoint 3: 
+```javascript
+var request = require("request");
+
+var options = { 
+    method: 'POST',
+    url: 'https://nubbify-professor.herokuapp.com/api/class/add',
+    headers: { 
+        'content-type': 'application/json' 
+    },
+    body: {
+        "rating": 5,
+        "review": "You rock!",
+        "name": "Cody",
+        "class": "CMSC351",
+        "teacher": "John Doe"
+    }
+};
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  console.log(body);
+});
+```
+
 Example Node.js POST request to endpoint 2
 ```javascript
 var request = require("request");
@@ -115,9 +141,9 @@ var options = {
         'content-type': 'application/json' 
     },
     body: {
-	"name": "John Doe",
-	"department": "Business",
-	"office": "CSIC1010"
+	"name": "John Dee",
+	"department": "History",
+	"office": "HIST1010"
     }
 };
 
@@ -140,7 +166,7 @@ var options = {
         'content-type': 'application/json' 
     },
     body: {
-        "name": "BMGT101",
+        "name": "BMGT201",
         "department": "Business"
     }
 };
@@ -156,14 +182,11 @@ request(options, function (error, response, body) {
 
 index.js should only deal with setting up the application and database connections.
 
-The files in routing deal with all of the express app routes. 
-
-The files in controller deal with getting information from the database related to the name of it (i.e teacher.js gets information for teachers).
-
+The files in routing deal with all of the express app routes (and data logic for each kind of route). 
 
 ### 6. npm packages
 
-Three foreign libraries include a pop-up library called  and a form validation library called and an input validation library called 
+One library includes a form validation library called validator. Another is eslint for checking for formatting and other JS problems.
 
 ### 7. User Interface
 
@@ -171,7 +194,7 @@ Bootstrap and jquery are cool, right? Handlebars is also nice.
 
 ### 8. Deployment
 
-This should be deployed at https://nubbify-professor.herokuapp.com/
+This should be deployed at https://nubbify-reviews.herokuapp.com/
 
 ### 9. README
 
