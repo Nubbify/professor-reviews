@@ -26,13 +26,8 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 app.use('/public', express.static('public'));
 
-//Let's pass app into the route files.
-require('./routing/misc.js')(app);
-require('./routing/classes.js')(app);
-require('./routing/reviews.js')(app);
-require('./routing/teachers.js')(app);
-require('./routing/department.js')(app);
-
+//Let's set up the routes with our routing modules.
+require('./routing/routes.js')(app);
 
 
 app.get('/addReview', function(req, res) {

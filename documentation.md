@@ -96,13 +96,13 @@ Adding classes is done through the API at `/api/addClass`
 2. POST endpoint route: `/api/teacher/add`
 3. POST endpoint route: `/api/class/add`
 4. DELETE endpoint route: `/api/class/remove/:className`
-5. DELETE endpoint route: `/api/review/remove/:review_id`
+5. DELETE endpoint route: `/api/review/remove/:reviewID`
 6. GET endpoint route: `/api/department`
-7. GET endpoint route: `/api/department/:department_name`
+7. GET endpoint route: `/api/department/:departmentName`
 8. GET endpoint route: `/api/class`
 9. GET endpoint route: `/api/class/:className`
 10. GET endpoint route: `/api/teacher`
-11. GET endpoint route: `/api/teacher/:teacher_name`
+11. GET endpoint route: `/api/teacher/:teacherName`
 
 Example Node.js POST request to endpoint 2
 ```javascript

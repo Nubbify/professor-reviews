@@ -19,12 +19,6 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/best">Best</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/worst">Worst</a>
-            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Department
@@ -32,6 +26,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <input class="form-control mr-sm-2" id="deptSearch" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="findByDepartment();">Search</button>
+                    <a class="btn btn-outline-success my-2 my-sm-0" href="/department">See all depts</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -41,14 +36,22 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <input class="form-control mr-sm-2" id="classSearch" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="findByClass();">Search</button>
+                    <a class="btn btn-outline-success my-2 my-sm-0" href="/class">See all classes</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Teacher
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <input class="form-control mr-sm-2" id="teacherSearch" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="findByTeacher();">Search</button>
+                    <a class="btn btn-outline-success my-2 my-sm-0" href="/teacher">See all teachers</a>
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/random">Random</a>
+                <a class="nav-link" href="/about">About</a>
             </li>
         </ul>
-        <form class="form-inline my-3 my-lg-0">
-            <input class="form-control mr-sm-3" type="search" placeholder="Filter Reviews w Name" aria-label="Filter Reviews w Name" id="currentFilter">
-        </form>
     </div>
 </nav>

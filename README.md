@@ -16,46 +16,56 @@ URL: https://final-389.herokuapp.com/
 
 Schemas: 
 ```javascript
-{
-    reviewSchema = new mongoose.Schema({
-        name: {
-            type: String,
-            required: true
-        },
-        rating: {
-            type: Number,
-            min: 0.0,
-            max: 5.0,
-            required: true
-        },
-        review: {
-            type: String
-        }
-    });
-    
-    teacherSchema = new mongoose.Schema({
-        name: {
-            type: String,
-            required: true
-        },
-        department: {
-            type: String
-        },
-        reviews: [reviewSchema]
-    });
-    
-    classSchema = new mongoose.Schema({
-        name: {
-            type: String,
-            required: true
-        },
-        department: {
-            type: String,
-            required: true
-        },
-        teachers: [teacherSchema]
-    });
-}
+let mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
+
+reviewSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    rating: {
+        type: Number,
+        min: 0.0,
+        max: 5.0,
+        required: true
+    },
+    review: {
+        type: String
+    },
+    class: {type: mongoose.Schema.ObjectId, ref: 'Class'},
+    teacher: {type: mongoose.Schema.ObjectId, ref: 'Teacher'}
+});
+
+teacherSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        unique: true,
+        required: true
+    },
+    department: {
+        type: String,
+        required: true
+    },
+    office: {
+        type: String
+    },
+    reviews: [ {type: mongoose.Schema.ObjectId, ref: 'Review'} ],
+    classes: [ {type: mongoose.Schema.ObjectId, ref: 'Class'} ]
+});
+
+classSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        unique: true,
+        required: true
+    },
+    department: {
+        type: String,
+        required: true
+    },
+    teachers: [ {type: mongoose.Schema.ObjectId, ref: 'Teacher'} ]
+});
 ```
 
 ### 2. Socket usage:
@@ -125,12 +135,12 @@ index.js should only deal with setting up the application and database connectio
 
 The files in routing deal with all of the express app routes. 
 
-The files in controller deal with getting information from the database related to the name of it (i.e teacher.js gets information for teachers).
+The files in data deal with getting information from the database and formatting it for handlebars.
 
 
 ### 6. npm packages
 
-Three foreign libraries include a pop-up library called  and a form validation library called and an input validation library called 
+Three foreign libraries include a pop-up library called  and a form validation/input sanitation library called validator. 
 
 ### 7. User Interface
 

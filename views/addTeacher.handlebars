@@ -1,0 +1,26 @@
+<h1>Create New Teacher</h1>
+{{#if error}}
+    <div class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        Error: {{error}}
+    </div>
+{{/if}}
+<article>
+    <form id="reviewForm" method="POST" action="/teacher/add">
+        <div class="input-field">
+            <label>Professor Name:</label>
+                <input type="text" name="name" size="50" placeholder="John Smith">
+        </div>
+        <div class="input-field">
+            <label>Office location:</label>
+            <input type="text" name="office" size="50" placeholder="ESJ9999">
+        </div>
+        <div class="input-field">
+            <label>Department:</label>
+                <input type="text" name="department" size="50" placeholder="Computer Science">
+        </div>
+        <button type="submit" id="submit" disabled="disabled" value="submit">Create New Teacher</button>
+    </form>
+</article>
+
+<script src="/public/js/formStuff.js"></script>

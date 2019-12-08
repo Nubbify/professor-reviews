@@ -1,0 +1,28 @@
+<div class="teacherReview">
+    <h3 class="name">{{this.name}}</h3>
+    Department: {{this.department}} <br>
+    Office: {{this.office}} <br>
+    <h5>Reviews</h5>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Score</th>
+                <th scope="col">Review</th>
+                <th scope="col">Class</th>
+                <th scope="col">By</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each this.reviews}}
+                <tr>
+                    <td>{{this.rating}}</td>
+                    <td>{{this.review}}</td>
+                    <td>{{this.class.name}}</td>
+                    <td>{{this.name}}</td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <br>
+    <hr>
+</div>

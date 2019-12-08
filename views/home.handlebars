@@ -1,12 +1,4 @@
-<a href="/addReview" class="btn btn-info" role="button">Add New Review</a>
-
-    <h2>All Reviews</h2>
-    <hr>
-    <div id="noMatches"></div>
-{{#each data}}
-    {{> review}}
-{{else}}
-    <article>
-        <h1>There are no reviews yet. :(</h1>
-    </article>
-{{/each}}
+<div class="center-block">
+    <a href="/review/add" class="btn btn-info center-block" role="button">Add New Review</a>
+    <a href="/teacher/add" class="btn btn-info center-block" role="button">Add New Teacher</a>
+</div>
