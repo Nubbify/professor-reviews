@@ -5,16 +5,12 @@ https://nubbify-professor.herokuapp.com/
 
 Name: Oscar Bautista
 
-Date: December 6th, 2019
-
-Project Topic: Professor reviews
-
-URL: https://final-389.herokuapp.com/
+URL: https://nubbify-professor.herokuapp.com/
  ---
 
 ### 1. Data Format and Storage
 
-Schemas: 
+Schemas are saved in the models folder under classes.js. Here's the base models:
 ```javascript
 reviewSchema = new mongoose.Schema({
     id: mongoose.ObjectId,
@@ -67,11 +63,7 @@ classSchema = new mongoose.Schema({
 });
 ```
 
-### 2. Socket usage:
-
-No socket usage here. Couldn't come up with a good use for them in the time I spent. ):
-
-### 3. View Data: 
+### 2. View Data: 
 
 Navigation pages for viewing data are:
 1. See list of departments -> `/department`
@@ -90,7 +82,7 @@ Navigation pages for inserting data include:
 Adding classes is done through the API at `/api/addClass`
 
 
-### 4. API endpoints
+### 3. API endpoints
 
 1. POST endpoint route: `/api/review/add`
 2. POST endpoint route: `/api/teacher/add`
@@ -104,13 +96,13 @@ Adding classes is done through the API at `/api/addClass`
 10. GET endpoint route: `/api/teacher`
 11. GET endpoint route: `/api/teacher/:teacherName`
 
-Example Node.js POST request to endpoint 3: 
+Example Node.js POST request to endpoint 1: 
 ```javascript
 var request = require("request");
 
 var options = { 
     method: 'POST',
-    url: 'https://nubbify-professor.herokuapp.com/api/class/add',
+    url: 'https://nubbify-professor.herokuapp.com/api/review/add',
     headers: { 
         'content-type': 'application/json' 
     },
@@ -178,24 +170,23 @@ request(options, function (error, response, body) {
 });
 ```
 
-### 5. Modules
+### 4. Modules
 
 index.js should only deal with setting up the application and database connections.
 
 The files in routing deal with all of the express app routes (and data logic for each kind of route). 
 
-### 6. npm packages
+### 5. npm packages
 
-One library includes a form validation library called validator
+One library includes a form validation library called validator. Another is eslint for checking for formatting and other JS problems.
 
-### 7. User Interface
+### 6. User Interface
 
-Bootstrap and jquery are cool, right? Handlebars is also nice.
+Bootstrap and jquery are cool, right? Handlebars is also nice. 
 
-### 8. Deployment
+The css and javascript files used throughout the site are found in public. In views, we have the handlebar files that
+create the pages (should be named in a manner similar to routing: you can figure out what is what).
+
+### 7. Deployment
 
 This should be deployed at https://nubbify-reviews.herokuapp.com/
-
-### 9. README
-
-You're reading it! Yay! \o/
