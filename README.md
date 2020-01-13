@@ -1,11 +1,11 @@
-https://nubbify-professor.herokuapp.com/
+https://nubbify-reviews.herokuapp.com/
 # How's My Professor
 
 ---
 
 Name: Oscar Bautista
 
-URL: https://nubbify-professor.herokuapp.com/
+URL: https://nubbify-reviews.herokuapp.com/
  ---
 
 ### 1. Data Format and Storage
@@ -102,7 +102,7 @@ var request = require("request");
 
 var options = { 
     method: 'POST',
-    url: 'https://nubbify-professor.herokuapp.com/api/review/add',
+    url: 'https://nubbify-reviews.herokuapp.com/api/review/add',
     headers: { 
         'content-type': 'application/json' 
     },
@@ -128,7 +128,7 @@ var request = require("request");
 
 var options = { 
     method: 'POST',
-    url: 'https://nubbify-professor.herokuapp.com/api/teacher/add',
+    url: 'https://nubbify-reviews.herokuapp.com/api/teacher/add',
     headers: { 
         'content-type': 'application/json' 
     },
@@ -153,7 +153,7 @@ var request = require("request");
 
 var options = { 
     method: 'POST',
-    url: 'https://nubbify-professor.herokuapp.com/api/class/add',
+    url: 'https://nubbify-reviews.herokuapp.com/api/class/add',
     headers: { 
         'content-type': 'application/json' 
     },
